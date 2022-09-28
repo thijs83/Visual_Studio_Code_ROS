@@ -44,8 +44,27 @@ Now we run the first python file to setup all the .json files in the .vscode fol
  python3 initialise_VSDebug.py
 ```
 
+Next, we need to open Visual Studio Code and open the folder catkin_ws. Now go to File -> Save Workspace As and press save. The final structure of the ROS and VS workspace will look like:
+```
+~/catkin_ws/
+    .vscode/
+        c_cpp_properties.json
+        extensions.json
+        settings.json
+        tasks.json
+    build/
+    devel/
+    src/
+        beginner_tutorials/
+        hello_vs_code/
+    .catkin_workspace
+    initialise_VSDebug.py
+    update_VSDebug.py
+    catkin_ws.code-workspace
+```
 
+Below an image of how it will look like in Visual studio code.
 
-
+TO DO: image
 
 ## 3) Automation of the VS workspace
