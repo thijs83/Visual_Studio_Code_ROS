@@ -90,13 +90,31 @@ Roscore has to be started for connecting the nodes. This is done by following th
 ```
 Press Ctrl+Shift+P -->> ROS: Start
 ```
-Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from the drop down menu and then press the green play button to the left. This starts the subscriber node. Now do the same for the c++: cpptalker_Node - PKG:beginner_tutorials. 
+Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from the drop down menu and then press the green play button to the left. This starts the subscriber node. Now do the same for the c++: cpptalker_Node - PKG:beginner_tutorials. Now the two nodes are running and talking to eachother. The terminal of the talker is visualized but you can switch to the subscriber node terminal using the bottom-left pannel and press on the wanted terminal as shown below.
 
 
 
 
+To stop the nodes, the terminals can be closed or the stop button can be pressed for the node. This is visualized in the image below.
 
-## 4) Increase speed
+
+
+Now you know how to start the nodes and stop them. The next section shows how to debug the code
+
+## 5) Debugging your code in VS with ROS
+
+The next step to debugging is very easy. Let's take the two nodes from previous section and open the scripts next to eachother and in both scripts set a Breakpoint as visualized in the image below.
+
+
+Now run both scripts as done in previous section and see how the code stops at the break point set in the publisher. The debug player should be put on the talker node, as shown in the figure below. Now press a few times F5 or the continue button in the debug player to see what happens. After a few times pressing, a yellow bar should appear in the subscriber file and the breakpoint is hit (see the figure below). Now in the dropdown menu in the debug player, select the subscriber node and the corresponding variables are loaded. Again press F5 to let the code continue. 
+
+Important!
+- You will see that the subscriber doesnt receive the first or first few messages. This is due to the setup of the architecture of ROS. The publisher is already publishing messages when the connections are not yet initialized, and thus are lost. To have zero loss, set a ros rate sleeper (of around 5 seconds) after setting up the publisher note and always first start the subscriber nodes. This will make sure that all messages are received by the subscribers. 
+
+## 4) Hints to increase development speed
 
 TO DO: add shortcut to ROS: update ROS & Debug
+
+TO DO: Multiple windows and cloning the workspace
+
 
