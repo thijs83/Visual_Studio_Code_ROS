@@ -68,3 +68,35 @@ Below an image of how it will look like in Visual studio code.
 TO DO: image
 
 ## 3) Automation of the VS workspace
+
+Now everything is ready we can start automating using the second python script. To make it easy and not having to run the python script everytime, a task is made that can be run from the Command Palette. This task automatically runs catkin_make (with debug settings to ON) and then runs the python script to include all ros exutables to the debug section.
+```
+To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: update ROS & Debug
+```
+
+TO DO: images next to eachother
+
+
+Now in the folder .vscode another file will be included named launch.json automatically. Everytime you alter files or delete/add executables, you have to run the above command. (This command runs catkin_make automatically and then updates the launch.json, so all executables are up to date with your code)
+
+We can now go to the Run and Debug section (Ctrl+Shift+D) and all the ros nodes are added to the drop-down menu visualized in the image below. 
+
+TO DO: Image
+
+The nodes are first described by if it is made as a python or c++ script, followed by the node name and then the package it originates from.
+Lets start two nodes that talk to eachother, one publishes a counter and the other subscribes to the same counter. 
+
+Roscore has to be started for connecting the nodes. This is done by following the commands:
+```
+Press Ctrl+Shift+P -->> ROS: Start
+```
+Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from the drop down menu and then press the green play button to the left. This starts the subscriber node. Now do the same for the c++: cpptalker_Node - PKG:beginner_tutorials. 
+
+
+
+
+
+## 4) Increase speed
+
+TO DO: add shortcut to ROS: update ROS & Debug
+
