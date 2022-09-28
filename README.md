@@ -22,26 +22,26 @@ The following extensions are recommended:
 ## 2) Setup of the VS Workspace
 
 First, a ROS workspace needs to be created, which eventually also will be the VS code workspace.
-```
-$ mkdir ~/catkin_ws
-$ cd ~/catkin_ws
-$ mkdir src
-$ mkdir ./vscode
-$ catkin_make
+```bash
+ mkdir ~/catkin_ws
+ cd ~/catkin_ws
+ mkdir src
+ mkdir ./vscode
+ catkin_make
 ```
 
-Note: Using catkin_make is essential to set up the ROS workspace, which is used by VS to know the workspace
+Note: Using catkin_make is essential to set up the ROS workspace for VS to know that it is a ROS workspace
 
 Now we need the two files and too showcase the example, there are two beginner ROS packages included. These need to be moved to the src folder. If you have other packages then remove the ones included in this repository.
-```
-$ git clone https://github.com/thijs83/Visual_Studio_Code_ROS.git
-$ mv -v ~/catkin_ws/Visual_Studio_Code_ROS/beginner_tutorials/ ~/catkin_ws/src
-$ mv -v ~/catkin_ws/Visual_Studio_Code_ROS/hello_vs_code/ ~/catkin_ws/src
+```bash
+ git clone https://github.com/thijs83/Visual_Studio_Code_ROS.git
+ mv -v ~/catkin_ws/Visual_Studio_Code_ROS/beginner_tutorials/ ~/catkin_ws/src
+ mv -v ~/catkin_ws/Visual_Studio_Code_ROS/hello_vs_code/ ~/catkin_ws/src
 ```
 
 Now we run the first python file to setup all the .json files in the .vscode folder. These are used by VS code to setup the environment and determine the debug settings. This script only has to run one time.
-```
-$ python3 initialise_VSDebug.py
+```bash
+ python3 initialise_VSDebug.py
 ```
 
 
