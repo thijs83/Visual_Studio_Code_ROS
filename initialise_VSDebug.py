@@ -32,7 +32,7 @@ tasks_data = {
         },
         {
             "label": "ROS: update Build & Debug",
-            "command": "python3 "+str(workspace_folder)"/update_VSDebug.py",
+            "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
             "type": "shell",
             "group": {
                 "kind": "build",
