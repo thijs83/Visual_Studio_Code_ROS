@@ -26,7 +26,7 @@ First, a ROS workspace needs to be created, which eventually also will be the VS
  mkdir ~/catkin_ws
  cd ~/catkin_ws
  mkdir src
- mkdir ./vscode
+ mkdir .vscode
  catkin_make
 ```
 
