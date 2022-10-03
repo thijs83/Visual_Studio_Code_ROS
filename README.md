@@ -37,6 +37,8 @@ Now we need the two files and too showcase the example, there are two beginner R
  git clone https://github.com/thijs83/Visual_Studio_Code_ROS.git
  mv -v ~/catkin_ws/Visual_Studio_Code_ROS/beginner_tutorials/ ~/catkin_ws/src
  mv -v ~/catkin_ws/Visual_Studio_Code_ROS/hello_vs_code/ ~/catkin_ws/src
+ mv ~/catkin_ws/Visual_Studio_Code_ROS/initialise_VSDebug.py ~/catkin_ws/
+ mv ~/catkin_ws/Visual_Studio_Code_ROS/update_VSDebug.py ~/catkin_ws/
 ```
 
 Now we run the first python file to setup all the .json files in the .vscode folder. These are used by VS code to setup the environment and determine the debug settings. This script only has to run one time.
