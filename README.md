@@ -73,7 +73,7 @@ TO DO: image
 
 Now everything is ready we can start automating using the second python script. To make it easy and not having to run the python script everytime, a task is made that can be run from the Command Palette. This task automatically runs catkin_make (with debug settings to ON) and then runs the python script to include all ros exutables to the debug section.
 ```
-To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: update ROS & Debug
+To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: update Build & Debug
 ```
 
 TO DO: images next to eachother
@@ -116,7 +116,7 @@ Important!
 
 ## 4) Hints to increase development speed
 
-TO DO: add shortcut to ROS: update ROS & Debug
+TO DO: add shortcut to ROS: update Build & Debug
 
 TO DO: Multiple windows and cloning the workspace
 
