@@ -9,6 +9,8 @@ Note: The assumption is made that you know how ROS works and that it is installe
 * [1. Visual Studio Code Extensions](#1-visual-studio-code-extensions)
 * [2. Setup of the VS workspace](#2-setup-of-the-vs-workspace)
 * [3. Automation of the VS workspace](#3-automation-of-the-vs-workspace)
+* [4. Debugging your code in VS with ROS](#4-debugging-your-code-in-vs-with-ros)
+* [5. Hints to increase development speed](#5-hints-to-increase-development-speed)
 
 ## 1) Visual Studio Code Extensions
 
@@ -109,7 +111,7 @@ To stop the nodes, the terminals can be closed or the stop button can be pressed
 
 Now you know how to start the nodes and stop them. The next section shows how to debug the code
 
-## 5) Debugging your code in VS with ROS
+## 4) Debugging your code in VS with ROS
 
 The next step to debugging is very easy. Let's take the two nodes from previous section and open the scripts next to eachother and in both scripts set a Breakpoint as visualized in the image below.
 
@@ -126,7 +128,7 @@ Now run both scripts as done in previous section and see how the code stops at t
 | - You will see that the subscriber doesnt receive the first or first few messages. This is due to the setup of the architecture of ROS. The publisher is already publishing messages when the connections are not yet initialized, and thus are lost. To have zero loss, set a ros rate sleeper (of around 5 seconds) after setting up the publisher note and always first start the subscriber nodes. This will make sure that all messages are received by the subscribers. |
 | - Another thing, you will notice with the tutorial nodes that sometimes the breakpoint of the publisher is hit twice before the breakpoint in the subscriber is hit. This is due to the speed until the next breakpoint, the publisher was faster in hitting the next breakpoint than the subscriber was in receiving the message and hitting it's breakpoint. |
 
-## 4) Hints to increase development speed
+## 5) Hints to increase development speed
 
 ### Keybindings
 We can assign a keybinding to start ROS: update Build & Debug by doing:
