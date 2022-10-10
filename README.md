@@ -118,9 +118,12 @@ Now run both scripts as done in previous section and see how the code stops at t
 
 ![Alt-text-1](images/talk_breakpoint.png?raw=true "Breakpoint hit in talker") ![Alt-text-2](images/sub_breakpoint.png?raw=true "Breakpoint hit in subscriber")
 
-Important!
-- You will see that the subscriber doesnt receive the first or first few messages. This is due to the setup of the architecture of ROS. The publisher is already publishing messages when the connections are not yet initialized, and thus are lost. To have zero loss, set a ros rate sleeper (of around 5 seconds) after setting up the publisher note and always first start the subscriber nodes. This will make sure that all messages are received by the subscribers. 
-- Another thing, you will notice with the tutorial nodes that sometimes the breakpoint of the publisher is hit twice before the breakpoint in the subscriber is hit. This is due to the speed until the next breakpoint, the publisher was faster in hitting the next breakpoint than the subscriber was in receiving the message and hitting it's breakpoint.
+
+| --- |
+| Important! |
+| - You will see that the subscriber doesnt receive the first or first few messages. This is due to the setup of the architecture of ROS. The publisher is already publishing messages when the connections are not yet initialized, and thus are lost. To have zero loss, set a ros rate sleeper (of around 5 seconds) after setting up the publisher note and always first start the subscriber nodes. This will make sure that all messages are received by the subscribers. |
+| - Another thing, you will notice with the tutorial nodes that sometimes the breakpoint of the publisher is hit twice before the breakpoint in the subscriber is hit. This is due to the speed until the next breakpoint, the publisher was faster in hitting the next breakpoint than the subscriber was in receiving the message and hitting it's breakpoint. |
+| --- |
 
 ## 4) Hints to increase development speed
 
