@@ -101,9 +101,9 @@ Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from 
 
 
 ![Alt-text-1](images/two_nodes.png?raw=true "Two nodes running")
-RED: The Debug player
-GREEN: The debug terminals, one for each node
-ORANGE: Checkmark when Roscore is running or cross if not
+RED: The Debug player  
+GREEN: The debug terminals, one for each node  
+ORANGE: Checkmark when Roscore is running or cross if not  
 
 To stop the nodes, the terminals can be closed or the stop button can be pressed for the node. This is visualized in the image below.
 
