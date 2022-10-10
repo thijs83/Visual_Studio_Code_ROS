@@ -101,9 +101,11 @@ Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from 
 
 
 ![Alt-text-1](images/two_nodes.png?raw=true "Two nodes running")
+The debug player (&#x1F34E;):
+GREEN APPLE (&#x1F34F;): 
+ORANGE BOOK (&#x1F4D9;):
 
 To stop the nodes, the terminals can be closed or the stop button can be pressed for the node. This is visualized in the image below.
-
 
 Now you know how to start the nodes and stop them. The next section shows how to debug the code
 
