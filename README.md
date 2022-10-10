@@ -140,14 +140,19 @@ The keybindings.json file will open. The keybindings in here overwrite the defau
 ]
 ```
 
-And it should look like the image below.
+And it should look like the image below. Save the file to make the keybinding work. Now you only have to use the keybinding to build/update the ros workspace and add new nodes to the launch file for VS code debugger
 
 ![Alt-text-1](images/keybinding.png?raw=true "Keybinding for build and debug")
 
 
 ### Multiple windows
 
+Instead of using one VS code window, one could use multiple VS code windows to debug more easily. This is espacially usefull with a multiple monitor setup. This needs to be done in a specific way, we need to clone the workspace. To do this follow,
+```
+Go to File --> Duplicate Workspace
+```
+Now you will have to VS code windows, both with the same VS code workspace. Now you can do the same test as presented in the previous chapter, only now you can run the publisher in one window and the subscriber in the other window. Below an image of how it looks like.
 
-TO DO: Multiple windows and cloning the workspace
+![Alt-text-1](images/two_screens.png?raw=true "Use of two VS code windows")
 
 
