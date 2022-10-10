@@ -114,15 +114,39 @@ Now you know how to start the nodes and stop them. The next section shows how to
 The next step to debugging is very easy. Let's take the two nodes from previous section and open the scripts next to eachother and in both scripts set a Breakpoint as visualized in the image below.
 
 
-Now run both scripts as done in previous section and see how the code stops at the break point set in the publisher. The debug player should be put on the talker node, as shown in the figure below. Now press a few times F5 or the continue button in the debug player to see what happens. After a few times pressing, a yellow bar should appear in the subscriber file and the breakpoint is hit (see the figure below). Now in the dropdown menu in the debug player, select the subscriber node and the corresponding variables are loaded. Again press F5 to let the code continue. 
+Now run both scripts as done in previous section and see how the code stops at the break point set in the publisher (left figure below). The debug player should be put on the talker node, as shown in the figure. Now press a few times F5 or the continue button in the debug player to see what happens. After a few times pressing, a yellow bar should appear in the subscriber file and the breakpoint is hit (see the right figure below). Now in the dropdown menu in the debug player, select the subscriber node and the corresponding variables are loaded. Again press F5 to let the code continue. 
+
+![Alt-text-1](images/talk_breakpoint.png?raw=true "Breakpoint hit in talker") ![Alt-text-2](images/sub_breakpoint.png?raw=true "Breakpoint hit in subscriber")
 
 Important!
 - You will see that the subscriber doesnt receive the first or first few messages. This is due to the setup of the architecture of ROS. The publisher is already publishing messages when the connections are not yet initialized, and thus are lost. To have zero loss, set a ros rate sleeper (of around 5 seconds) after setting up the publisher note and always first start the subscriber nodes. This will make sure that all messages are received by the subscribers. 
-- Another thing you will notice with the tutorial nodes is that sometimes the breakpoint of the publisher is hit twice before the breakpoint in the subscriber is hit. This is due to the speed until the next breakpoint, the publisher was faster in hitting the next breakpoint then the subscriber was in receiving the message and hitting it's breakpoint
+- Another thing, you will notice with the tutorial nodes that sometimes the breakpoint of the publisher is hit twice before the breakpoint in the subscriber is hit. This is due to the speed until the next breakpoint, the publisher was faster in hitting the next breakpoint than the subscriber was in receiving the message and hitting it's breakpoint.
 
 ## 4) Hints to increase development speed
 
-TO DO: add shortcut to ROS: update Build & Debug
+### Keybindings
+We can assign a keybinding to start ROS: update Build & Debug by doing:
+```
+Press Ctrl+Shift+P -->> Preferences: Open Keyboard Shortcuts (JSON)
+```
+The keybindings.json file will open. The keybindings in here overwrite the default keybinding so make sure that the keybinding is not something you reguraly use. Add the following to the file,
+```
+[
+    { 
+        "key": "ctrl+F5",         
+        "command": "workbench.action.tasks.runTask",
+        "args": "ROS: update Build & Debug"
+    }
+]
+```
+
+And it should look like the image below.
+
+![Alt-text-1](images/keybinding.png?raw=true "Keybinding for build and debug")
+
+
+### Multiple windows
+
 
 TO DO: Multiple windows and cloning the workspace
 
