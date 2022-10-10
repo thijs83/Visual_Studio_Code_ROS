@@ -39,6 +39,7 @@ Now we need the two files and too showcase the example, there are two beginner R
  mv -v ~/catkin_ws/Visual_Studio_Code_ROS/hello_vs_code/ ~/catkin_ws/src
  mv ~/catkin_ws/Visual_Studio_Code_ROS/initialise_VSDebug.py ~/catkin_ws/
  mv ~/catkin_ws/Visual_Studio_Code_ROS/update_VSDebug.py ~/catkin_ws/
+ sudo rm -r ~/catkin_ws/Visual_Studio_Code_ROS
 ```
 
 Now we run the first python file to setup all the .json files in the .vscode folder. These are used by VS code to setup the environment and determine the debug settings. This script only has to run one time.
@@ -67,7 +68,11 @@ Next, we need to open Visual Studio Code and open the folder catkin_ws. Now go t
 
 Below an image of how it will look like in Visual studio code.
 
-TO DO: image
+![Alt text](images/image_setup.png?raw=true "Initial setup")
+
+
+
+Note: Make sure that the ROS environment is sourced in .bashrc and that ROS1 is mentioned with its distribution in the bar located at the bottom of VS code.
 
 ## 3) Automation of the VS workspace
 
@@ -76,14 +81,14 @@ Now everything is ready we can start automating using the second python script. 
 To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: update Build & Debug
 ```
 
-TO DO: images next to eachother
+![Alt-text-1](images/tasks.png?raw=true "Tasks drop down menu") ![Alt-text-2](images/ros_build.png?raw=true "ROS build drop down menu")
 
 
 Now in the folder .vscode another file will be included named launch.json automatically. Everytime you alter files or delete/add executables, you have to run the above command. (This command runs catkin_make automatically and then updates the launch.json, so all executables are up to date with your code)
 
 We can now go to the Run and Debug section (Ctrl+Shift+D) and all the ros nodes are added to the drop-down menu visualized in the image below. 
 
-TO DO: Image
+![Alt-text-1](images/dropdown_menu.png?raw=true "Debug drop down menu")
 
 The nodes are first described by if it is made as a python or c++ script, followed by the node name and then the package it originates from.
 Lets start two nodes that talk to eachother, one publishes a counter and the other subscribes to the same counter. 
@@ -92,13 +97,12 @@ Roscore has to be started for connecting the nodes. This is done by following th
 ```
 Press Ctrl+Shift+P -->> ROS: Start
 ```
-Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from the drop down menu and then press the green play button to the left. This starts the subscriber node. Now do the same for the c++: cpptalker_Node - PKG:beginner_tutorials. Now the two nodes are running and talking to eachother. The terminal of the talker is visualized but you can switch to the subscriber node terminal using the bottom-left pannel and press on the wanted terminal as shown below.
+Now start c++: cppsub_Node - PKG:beginner_tutorials by selecting this node from the drop down menu and then press the green play button to the left. This starts the subscriber node. Now do the same for the c++: cpptalker_Node - PKG:beginner_tutorials. Now the two nodes are running and talking to eachother. The terminal of the talker is visualized but you can switch to the subscriber node terminal using the bottom-left pannel (Marked with the green circle) and press on the wanted terminal as shown below.
 
 
-
+![Alt-text-1](images/two_nodes.png?raw=true "Two nodes running")
 
 To stop the nodes, the terminals can be closed or the stop button can be pressed for the node. This is visualized in the image below.
-
 
 
 Now you know how to start the nodes and stop them. The next section shows how to debug the code
