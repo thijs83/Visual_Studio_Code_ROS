@@ -8,46 +8,91 @@ import sys
 # Retrieve the workspace folder
 workspace_folder = str(Path().absolute())
 
+# check if build with catkin_make or catkin build by finding the log folder
+folder_names = [f for f in os.listdir(workspace_folder) if os.path.isdir(os.path.join(workspace_folder,f))]
+catkin_make = True
+if ".catkin_tools" in folder_names:
+    catkin_make = False
+
 ########################################################################################
 ## Creation of the tasks.json file
 ########################################################################################
-tasks_data = {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "ROS: central_catkin_make",
-            "type": "catkin_make",
-            "args": [
-                "--directory",
-				workspace_folder,
-                "-j4",
-                "-DCMAKE_BUILD_TYPE=Debug",
-                "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
-            ],
-            "problemMatcher": "$catkin-gcc",
-            "group": {
-                "kind": "build",
-                "isDefault": True
-            }
-        },
-        {
-            "label": "ROS: update Build & Debug",
-            "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
-            "type": "shell",
-            "group": {
-                "kind": "build",
-                "isDefault": True
+if catkin_make:
+    tasks_data = {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "ROS: central_catkin_make",
+                "type": "catkin_make",
+                "args": [
+                    "--directory",
+                    workspace_folder,
+                    "-j4",
+                    "-DCMAKE_BUILD_TYPE=Debug",
+                    "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
+                ],
+                "problemMatcher": "$catkin-gcc",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                }
             },
-            "presentation": {
-                "reveal": "always",
-                "panel": "new",
-                "focus": True
-            },"dependsOn": [
-                "ROS: central_catkin_make"                               
-            ]
-        }
-    ]
-}
+            {
+                "label": "ROS: update Build & Debug",
+                "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
+                "type": "shell",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                    "focus": True
+                },"dependsOn": [
+                    "ROS: central_catkin_make"                               
+                ]
+            }
+        ]
+    }
+else:
+        tasks_data = {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "ROS: central_catkin_build",
+                "type": "catkin",
+                "args": [
+                    "build",
+                    "-j4",
+                    "-DCMAKE_BUILD_TYPE=Debug",
+                    "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
+                ],
+                "problemMatcher": "$catkin-gcc",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                }
+            },
+            {
+                "label": "ROS: update Build & Debug",
+                "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
+                "type": "shell",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                    "focus": True
+                },"dependsOn": [
+                    "ROS: central_catkin_build"                               
+                ]
+            }
+        ]
+    }
+
 # Store the data in the json file
 with open('.vscode/tasks.json', 'w') as jsonFile_tasks:
     json.dump(tasks_data, jsonFile_tasks, indent=4)
