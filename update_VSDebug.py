@@ -10,22 +10,19 @@ import glob
 workspace_folder = str(Path().absolute())
 
 # Find all packages and check if there exists atleast one
-package_names = [f for f in os.listdir(workspace_folder+"/src") if os.path.isdir(os.path.join(workspace_folder+"/src",f))]
-
-if not package_names:
-    print("There are no packages and thus nothing is build")
-    sys.exit(1)
-
-# Check if initial build is done
 try:
-    test = os.listdir(workspace_folder+"/devel")
-
-    if not test:
-        print("First build the envirnment, before calling this script")
-        sys.exit(1)
+    package_names = [f for f in os.listdir(workspace_folder+"/devel/lib") if os.path.isdir(os.path.join(workspace_folder+"/devel/lib",f))]
+    if "pkgconfig" in package_names:
+        package_names.remove("pkgconfig")
+    if "python3" in package_names:
+        package_names.remove("python3")
 except:
-    print("First build the envirnment, before calling this script")
+    print("First build the envirnment or include packages, before calling this script")
     sys.exit(1)
+
+
+
+
 
 ########################################################################################
 ## Creation of the launch.json file
