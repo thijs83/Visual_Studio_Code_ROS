@@ -38,8 +38,24 @@ if catkin_make:
                 }
             },
             {
-                "label": "ROS: update Build & Debug",
+                "label": "ROS: update Build & Debug rosrun",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
+                "type": "shell",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                    "focus": True
+                },"dependsOn": [
+                    "ROS: central_catkin_make"                               
+                ]
+            },
+            {
+                "label": "ROS: update Build & Debug roslaunch",
+                "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
                 "type": "shell",
                 "group": {
                     "kind": "build",
@@ -89,6 +105,22 @@ else:
                 },"dependsOn": [
                     "ROS: central_catkin_build"                               
                 ]
+            },
+            {
+                "label": "ROS: update Build & Debug roslaunch",
+                "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
+                "type": "shell",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                    "focus": True
+                },"dependsOn": [
+                    "ROS: central_catkin_make"                               
+                ]
             }
         ]
     }
@@ -101,41 +133,26 @@ with open('.vscode/tasks.json', 'w') as jsonFile_tasks:
 ########################################################################################
 ## Creation of the c_cpp_properties.json file
 ########################################################################################
-c_cpp_properties_temp = []
-## check for catkin build if packages are already there
-package_names = [f for f in os.listdir(workspace_folder+"/build") if os.path.isdir(os.path.join(workspace_folder+"/build",f))]
-# Remove name catkin_tools_prebuild
-if "catkin_tools_prebuild" in package_names:
-    package_names.remove("catkin_tools_prebuild")
-
-# check if catkin_make 
-if catkin_make:
-    c_cpp_properties_temp = {
-                "name": "Linux",
-                "intelliSenseMode": "gcc-x64",
-                "compilerPath": "/usr/bin/g++",
-                "cStandard": "c11",
-                "cppStandard": "c++17",
-                "compileCommands": "${workspaceFolder}/build/compile_commands.json"
-            }
-else:
-    for j in package_names:
-        c_cpp_properties_temp.append({
-                    "name": "Linux_"+str(j),
-                    "intelliSenseMode": "gcc-x64",
-                    "compilerPath": "/usr/bin/g++",
-                    "cStandard": "c11",
-                    "cppStandard": "c++17",
-                    "compileCommands": "${workspaceFolder}/build/"+str(j)+"/compile_commands.json"
-        })
 
 # create the full properties file
+# So intellisense can find all headers from ROS, installed packages and headers in the workspace
 c_cpp_properties_data = {
         "configurations": [
+            {
+            "name": "Ubuntu",
+            "includePath": [
+                "/usr/include/**",
+                "/opt/ros/noetic/include/**",
+                "${workspaceFolder}/**"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+            }
         ],
         "version": 4
     }
-c_cpp_properties_data["configurations"] = c_cpp_properties_temp
 
 # Store the data in the json file
 with open('.vscode/c_cpp_properties.json', 'w') as jsonFile_c_cpp_properties:
