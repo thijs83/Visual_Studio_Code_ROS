@@ -1,3 +1,8 @@
+TO DO: catkin build primerly used
+TO DO: explain what each of the json files explains
+
+
+
 # Automation in VS Code with ROS
 
 This repository contains two important python scripts that automate your ROS workflow in the Visual Studio Code IDE. Below is a step by step guide on how to setup the VS environment and work with this environment. 

@@ -22,12 +22,11 @@ if catkin_make:
         "version": "2.0.0",
         "tasks": [
             {
-                "label": "ROS: central_catkin_make",
+                "label": "ROS: catkin_make",
                 "type": "catkin_make",
                 "args": [
                     "--directory",
                     workspace_folder,
-                    "-j4",
                     "-DCMAKE_BUILD_TYPE=Debug",
                     "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
                 ],
@@ -38,7 +37,7 @@ if catkin_make:
                 }
             },
             {
-                "label": "ROS: update Build & Debug rosrun",
+                "label": "ROS: catkin_make --->> Debug rosrun",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
                 "type": "shell",
                 "group": {
@@ -50,11 +49,11 @@ if catkin_make:
                     "panel": "new",
                     "focus": True
                 },"dependsOn": [
-                    "ROS: central_catkin_make"                               
+                    "ROS: catkin_make"                               
                 ]
             },
             {
-                "label": "ROS: update Build & Debug roslaunch",
+                "label": "ROS: catkin_make --->>> Debug roslaunch",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
                 "type": "shell",
                 "group": {
@@ -66,7 +65,7 @@ if catkin_make:
                     "panel": "new",
                     "focus": True
                 },"dependsOn": [
-                    "ROS: central_catkin_make"                               
+                    "ROS: catkin_make"                               
                 ]
             }
         ]
@@ -76,11 +75,10 @@ else:
         "version": "2.0.0",
         "tasks": [
             {
-                "label": "ROS: central_catkin_build",
+                "label": "ROS: catkin build",
                 "type": "catkin",
                 "args": [
                     "build",
-                    "-j4",
                     "-DCMAKE_BUILD_TYPE=Debug",
                     "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
                 ],
@@ -91,7 +89,19 @@ else:
                 }
             },
             {
-                "label": "ROS: update Build & Debug",
+                "label": "ROS: catkin clean",
+                "type": "catkin",
+                "args": [
+                    "clean"
+                ],
+                "problemMatcher": "$catkin-gcc",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                }
+            },
+            {
+                "label": "ROS: catkin build --->> Debug rosrun",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
                 "type": "shell",
                 "group": {
@@ -100,14 +110,14 @@ else:
                 },
                 "presentation": {
                     "reveal": "always",
-                    "panel": "new",
+                    "panel": "old",
                     "focus": True
                 },"dependsOn": [
-                    "ROS: central_catkin_build"                               
+                    "ROS: catkin build"                               
                 ]
             },
             {
-                "label": "ROS: update Build & Debug roslaunch",
+                "label": "ROS: catkin build -->> Debug roslaunch",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
                 "type": "shell",
                 "group": {
@@ -116,10 +126,10 @@ else:
                 },
                 "presentation": {
                     "reveal": "always",
-                    "panel": "new",
+                    "panel": "old",
                     "focus": True
                 },"dependsOn": [
-                    "ROS: central_catkin_make"                               
+                    "ROS: catkin build"                               
                 ]
             }
         ]
