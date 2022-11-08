@@ -79,6 +79,25 @@ else:
                 "type": "catkin",
                 "args": [
                     "build",
+                    "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
+                ],
+                "problemMatcher": "$catkin-gcc",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared",
+                    "focus": True,
+                    "clear": True
+                }
+            },
+            {
+                "label": "ROS: catkin build debug",
+                "type": "catkin",
+                "args": [
+                    "build",
                     "-DCMAKE_BUILD_TYPE=Debug",
                     "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
                 ],
@@ -86,6 +105,12 @@ else:
                 "group": {
                     "kind": "build",
                     "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared",
+                    "focus": True,
+                    "clear": True
                 }
             },
             {
@@ -106,7 +131,7 @@ else:
                 }
             },
             {
-                "label": "ROS: catkin build --->> Debug rosrun",
+                "label": "ROS: catkin build debug --->> Debug rosrun",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
                 "type": "shell",
                 "group": {
@@ -118,11 +143,11 @@ else:
                     "panel": "shared",
                     "focus": True
                 },"dependsOn": [
-                    "ROS: catkin build"                               
+                    "ROS: catkin build debug"                               
                 ]
             },
             {
-                "label": "ROS: catkin build -->> Debug roslaunch",
+                "label": "ROS: catkin build debug -->> Debug roslaunch",
                 "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
                 "type": "shell",
                 "group": {
@@ -134,7 +159,23 @@ else:
                     "panel": "shared",
                     "focus": True
                 },"dependsOn": [
-                    "ROS: catkin build"                               
+                    "ROS: catkin build debug"                               
+                ]
+            },
+            {
+                "label": "ROS: catkin build debug -->> Debug roslaunch from specific Pkg",
+                "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch_pkg.py",
+                "type": "shell",
+                "group": {
+                    "kind": "build",
+                    "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared",
+                    "focus": True
+                },"dependsOn": [
+                    "ROS: catkin build debug"                               
                 ]
             }
         ]
