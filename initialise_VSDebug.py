@@ -46,7 +46,7 @@ if catkin_make:
                 },
                 "presentation": {
                     "reveal": "always",
-                    "panel": "new",
+                    "panel": "shared",
                     "focus": True
                 },"dependsOn": [
                     "ROS: catkin_make"                               
@@ -62,7 +62,7 @@ if catkin_make:
                 },
                 "presentation": {
                     "reveal": "always",
-                    "panel": "new",
+                    "panel": "shared",
                     "focus": True
                 },"dependsOn": [
                     "ROS: catkin_make"                               
@@ -98,6 +98,11 @@ else:
                 "group": {
                     "kind": "build",
                     "isDefault": True
+                },
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "shared",
+                    "focus": True
                 }
             },
             {
@@ -110,7 +115,7 @@ else:
                 },
                 "presentation": {
                     "reveal": "always",
-                    "panel": "old",
+                    "panel": "shared",
                     "focus": True
                 },"dependsOn": [
                     "ROS: catkin build"                               
@@ -126,7 +131,7 @@ else:
                 },
                 "presentation": {
                     "reveal": "always",
-                    "panel": "old",
+                    "panel": "shared",
                     "focus": True
                 },"dependsOn": [
                     "ROS: catkin build"                               
@@ -195,7 +200,8 @@ settings_data = {
         "/opt/ros/noetic/lib/python3/dist-packages"
     ],
     "cmake.sourceDirectory": "${workspaceFolder}/src",
-    "cmake.configureOnOpen": False
+    "cmake.configureOnOpen": False,
+    "terminal.integrated.scrollback": 1000000,
 }
 # Store the data in the json file
 with open('.vscode/settings.json', 'w') as jsonFile_settings:
