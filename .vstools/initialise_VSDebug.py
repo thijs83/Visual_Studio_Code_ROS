@@ -189,7 +189,6 @@ with open('.vscode/tasks.json', 'w') as jsonFile_tasks:
 ########################################################################################
 ## Creation of the c_cpp_properties.json file
 ########################################################################################
-
 # create the full properties file
 # So intellisense can find all headers from ROS, installed packages and headers in the workspace
 c_cpp_properties_data = {

@@ -80,13 +80,13 @@ Below an image of how it will look like in Visual studio code.
 
 
 
-Note: Make sure that the ROS environment is sourced in .bashrc and that ROS1 is mentioned with its distribution in the bar located at the bottom of VS code.
+Note: Make sure that the ROS environment is sourced in .bashrc and that ROS1 is mentioned with its distribution in the bar located at the bottom of VS code. If it is not the case, close Visual Studio Code and add the source of the ROS environment to your .bashrc and restart Visual Studio Code. ROS1 should now be visible.
 
 ## 3) Automation of the VS workspace
 
-Now everything is ready we can start automating using the second python script. To make it easy and not having to run the python script everytime, a task is made that can be run from the Command Palette. This task automatically runs catkin_make (with debug settings to ON) and then runs the python script to include all ros exutables to the debug section.
+Now everything is ready we can start automating using the second python script. To make it easy and not having to run the python script everytime, a task is made that can be run from the Command Palette. This task automatically runs 'catkin build'(with debug settings to ON) and then runs the python script to include all ros exutables to the debug section.
 ```
-To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: update Build & Debug
+To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: catkin build debug ~ Debug rosrun
 ```
 
 ![Alt-text-1](images/tasks.png?raw=true "Tasks drop down menu") ![Alt-text-2](images/ros_build.png?raw=true "ROS build drop down menu")
@@ -98,7 +98,7 @@ We can now go to the Run and Debug section (Ctrl+Shift+D) and all the ros nodes 
 
 ![Alt-text-1](images/dropdown_menu.png?raw=true "Debug drop down menu")
 
-The nodes are first described by if it is made as a python or c++ script, followed by the node name and then the package it originates from.
+The nodes are first described by the package name in alphabetical order, followed by the node name and then if its a c++ or python file.
 Lets start two nodes that talk to eachother, one publishes a counter and the other subscribes to the same counter. 
 
 Roscore has to be started for connecting the nodes. This is done by following the commands:
