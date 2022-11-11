@@ -38,7 +38,7 @@ if catkin_make:
             },
             {
                 "label": "ROS: catkin_make --->> Debug rosrun",
-                "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
+                "command": "python3 "+str(workspace_folder)+"/.vstools/update_VSDebug.py",
                 "type": "shell",
                 "group": {
                     "kind": "build",
@@ -54,7 +54,7 @@ if catkin_make:
             },
             {
                 "label": "ROS: catkin_make --->>> Debug roslaunch",
-                "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
+                "command": "python3 "+str(workspace_folder)+"/.vstools/update_VSDebug_launch.py",
                 "type": "shell",
                 "group": {
                     "kind": "build",
@@ -132,7 +132,7 @@ else:
             },
             {
                 "label": "ROS: catkin build debug --->> Debug rosrun",
-                "command": "python3 "+str(workspace_folder)+"/update_VSDebug.py",
+                "command": "python3 "+str(workspace_folder)+"/.vstools/update_VSDebug.py",
                 "type": "shell",
                 "group": {
                     "kind": "build",
@@ -148,7 +148,7 @@ else:
             },
             {
                 "label": "ROS: catkin build debug -->> Debug roslaunch",
-                "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch.py",
+                "command": "python3 "+str(workspace_folder)+"/.vstools/update_VSDebug_launch.py",
                 "type": "shell",
                 "group": {
                     "kind": "build",
@@ -164,7 +164,7 @@ else:
             },
             {
                 "label": "ROS: catkin build debug -->> Debug roslaunch from specific Pkg",
-                "command": "python3 "+str(workspace_folder)+"/update_VSDebug_launch_pkg.py",
+                "command": "python3 "+str(workspace_folder)+"/.vstools/update_VSDebug_launch_pkg.py",
                 "type": "shell",
                 "group": {
                     "kind": "build",

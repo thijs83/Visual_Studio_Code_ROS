@@ -1,8 +1,3 @@
-TO DO: catkin build primerly used
-TO DO: explain what each of the json files explains
-
-
-
 # Automation in VS Code with ROS
 
 This repository contains two important python scripts that automate your ROS workflow in the Visual Studio Code IDE. Below is a step by step guide on how to setup the VS environment and work with this environment. 
@@ -35,50 +30,48 @@ First, a ROS workspace needs to be created, which eventually also will be the VS
  mkdir src
  mkdir .vscode
 ```
-Now you need to specifify if you want to use catkin_make or catkin build.
-So use,
-```
-catkin_make
-```
-OR!!!!
+Now we need to initilize the catkin workspace,
 ```
 catkin build
 ```
-It is up to you what you prefer.
-Note: Using catkin_make or catkin build is essential to set up the ROS workspace for VS to know that it is a ROS workspace
+Note: You could also use 'catkin_make' with this repository but it is recommended to use 'catkin build' since this repository only provides a basic setup for 'catkin_make' and doesn't have all the features described below.
+
+Note: Using catkin build or catkin_make is essential to set up the ROS workspace for VS to know that it is a ROS workspace
 
 Now we need the two files and too showcase the example, there are two beginner ROS packages included. These need to be moved to the src folder. If you have other packages then remove the ones included in this repository.
 ```bash
  git clone https://github.com/thijs83/Visual_Studio_Code_ROS.git
  mv -v Visual_Studio_Code_ROS/beginner_tutorials/ src
  mv -v Visual_Studio_Code_ROS/hello_vs_code/ src
- mv Visual_Studio_Code_ROS/initialise_VSDebug.py .
- mv Visual_Studio_Code_ROS/update_VSDebug.py .
+ mv -v Visual_Studio_Code_ROS/.vstools .
  sudo rm -r Visual_Studio_Code_ROS
 ```
 
-Now we run the first python file to setup all the .json files in the .vscode folder. These are used by VS code to setup the environment and determine the debug settings. This script only has to run one time.
+Now we run the first python file to setup all the .json files in the .vscode folder. These are used by VS code to setup the environment and determine the debug settings. This script only has to run one time (the first time).
 ```bash
- python3 initialise_VSDebug.py
+ python3 .vstools/initialise_VSDebug.py
 ```
 
 Next, we need to open Visual Studio Code and open the folder catkin_ws. Now go to File -> Save Workspace As and press save. The final structure of the ROS and VS workspace will look like:
 ```
 ~/catkin_ws/
+    .catkin_tools
     .vscode/
         c_cpp_properties.json
         extensions.json
         settings.json
         tasks.json
+    .vstools/
+        initialise_VSDebug.py
+        update_VSDebug_launch_pkg.py
+        update_VSDebug_launch.py
+        update_VSDebug.py
     build/
     devel/
+    logs/
     src/
         beginner_tutorials/
         hello_vs_code/
-    .catkin_workspace
-    initialise_VSDebug.py
-    update_VSDebug.py
-    catkin_ws.code-workspace
 ```
 
 Below an image of how it will look like in Visual studio code.
