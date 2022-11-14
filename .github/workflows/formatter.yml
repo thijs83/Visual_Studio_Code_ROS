@@ -1,0 +1,37 @@
+# Name of the workflow
+name: Check for python format
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# Create a workflow that is made of one or more jobs that can run sequentially or in parallel
+jobs:
+  #
+  flake8-lint:
+    # Specifiy the environment the job needs to run in
+    runs-on: ubuntu-20.04
+
+    # Create one or more steps that need to be executed
+    steps:
+
+    # Define the name for one of the steps
+    - name: Checkout
+      # Get the github code repository
+      uses: actions/checkout@v2
+
+    # Setup python environment
+    - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+    # Check python code
+    - name: flake8 Lint
+        uses: py-actions/flake8@v2
+        with:
+          max-line-length: "100"
