@@ -21,9 +21,6 @@ except:
     sys.exit(1)
 
 
-
-
-
 ########################################################################################
 ## Creation of the launch.json file
 ########################################################################################
@@ -84,4 +81,3 @@ launch_data["configurations"] = launch_data_array
 with open('.vscode/launch.json', 'w') as jsonFile_launch:
     json.dump(launch_data, jsonFile_launch, indent=4)
     jsonFile_launch.close()
-
