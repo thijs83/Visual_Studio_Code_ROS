@@ -26,12 +26,12 @@ jobs:
 
     # Setup python environment
     - name: Set up Python environment
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
 
     # Check python code
     - name: flake8 Lint
-        uses: py-actions/flake8@v2
-        with:
-          max-line-length: "100"
+      uses: py-actions/flake8@v2
+      with:
+        max-line-length: "100"
