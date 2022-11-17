@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import json
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Retrieve the workspace folder
 workspace_folder = str(Path().absolute())

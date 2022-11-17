@@ -37,7 +37,6 @@
 ## to the 'chatter' topic
 
 import rospy
-import system
 from std_msgs.msg import String
 
 

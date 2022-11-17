@@ -1,3 +1,5 @@
+[![format_check](https://github.com/thijs83/Visual_Studio_Code_ROS/actions/workflows/format_check.yml/badge.svg)](https://github.com/thijs83/Visual_Studio_Code_ROS/actions/workflows/format_check.yml)
+
 # Automation in VS Code with ROS
 
 This repository contains two important python scripts that automate your ROS workflow in the Visual Studio Code IDE. Below is a step by step guide on how to setup the VS environment and work with this environment. 
