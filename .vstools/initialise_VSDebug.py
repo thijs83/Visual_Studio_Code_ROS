@@ -17,9 +17,9 @@ catkin_make = True
 if ".catkin_tools" in folder_names:
     catkin_make = False
 
-####################################################
-# Creation of the tasks.json file
-#####################################################
+########################################################################################
+## Creation of the tasks.json file
+########################################################################################
 if catkin_make:
     tasks_data = {
         "version": "2.0.0",
@@ -37,7 +37,7 @@ if catkin_make:
                 "group": {"kind": "build", "isDefault": True},
             },
             {
-                "label": "ROS: catkin_make --->> Debug rosrun",
+                "label": "ROS: catkin_make ~ Debug rosrun",
                 "command": "python3 "
                 + str(workspace_folder)
                 + "/.vstools/update_VSDebug.py",
@@ -47,7 +47,7 @@ if catkin_make:
                 "dependsOn": ["ROS: catkin_make"],
             },
             {
-                "label": "ROS: catkin_make --->>> Debug roslaunch",
+                "label": "ROS: catkin_make ~ Debug roslaunch",
                 "command": "python3 "
                 + str(workspace_folder)
                 + "/.vstools/update_VSDebug_launch.py",
@@ -65,7 +65,11 @@ else:
             {
                 "label": "ROS: catkin build",
                 "type": "catkin",
-                "args": ["build", "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"],
+                "args": [
+                    "build",
+                    "-j$(($(nproc)-1))",
+                    "-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
+                ],
                 "problemMatcher": "$catkin-gcc",
                 "group": {"kind": "build", "isDefault": True},
                 "presentation": {
@@ -80,6 +84,7 @@ else:
                 "type": "catkin",
                 "args": [
                     "build",
+                    "-j$(($(nproc)-1))",
                     "-DCMAKE_BUILD_TYPE=Debug",
                     "-DCMAKE_EXPORT_COMPILE_COMMANDS=1",
                 ],
@@ -101,7 +106,7 @@ else:
                 "presentation": {"reveal": "always", "panel": "shared", "focus": True},
             },
             {
-                "label": "ROS: catkin build debug --->> Debug rosrun",
+                "label": "ROS: catkin build debug ~ Debug rosrun",
                 "command": "python3 "
                 + str(workspace_folder)
                 + "/.vstools/update_VSDebug.py",
@@ -111,7 +116,7 @@ else:
                 "dependsOn": ["ROS: catkin build debug"],
             },
             {
-                "label": "ROS: catkin build debug -->> Debug roslaunch",
+                "label": "ROS: catkin build debug ~ Debug roslaunch",
                 "command": "python3 "
                 + str(workspace_folder)
                 + "/.vstools/update_VSDebug_launch.py",
@@ -121,8 +126,7 @@ else:
                 "dependsOn": ["ROS: catkin build debug"],
             },
             {
-                "label": "ROS: catkin build debug -->> Debug roslaunch \
-                          from specific Pkg",
+                "label": "ROS: catkin build debug ~ Debug roslaunch from specific Pkg",
                 "command": "python3 "
                 + str(workspace_folder)
                 + "/.vstools/update_VSDebug_launch_pkg.py",
@@ -139,12 +143,11 @@ with open(".vscode/tasks.json", "w") as jsonFile_tasks:
     json.dump(tasks_data, jsonFile_tasks, indent=4)
     jsonFile_tasks.close()
 
-############################################################
-# Creation of the c_cpp_properties.json file
-############################################################
+########################################################################################
+## Creation of the c_cpp_properties.json file
+########################################################################################
 # create the full properties file
-# So intellisense can find all headers from ROS,
-# installed packages and headers in the workspace
+# So intellisense can find all headers from ROS, installed packages and headers in the workspace
 c_cpp_properties_data = {
     "configurations": [
         {
@@ -168,9 +171,9 @@ with open(".vscode/c_cpp_properties.json", "w") as jsonFile_c_cpp_properties:
     json.dump(c_cpp_properties_data, jsonFile_c_cpp_properties, indent=4)
     jsonFile_c_cpp_properties.close()
 
-##############################################################
-# Creation of the extensions.json file
-##############################################################
+########################################################################################
+## Creation of the extensions.json file
+########################################################################################
 extensions_data = {
     "recommendations": [
         "eamodio.gitlens",
@@ -186,21 +189,30 @@ with open(".vscode/extensions.json", "w") as jsonFile_extensions:
     json.dump(extensions_data, jsonFile_extensions, indent=4)
     jsonFile_extensions.close()
 
-###############################################################
-# Creation of the settings.json file
-###############################################################
+########################################################################################
+## Creation of the settings.json file
+########################################################################################
 settings_data = {
-    "python.autoComplete.extraPaths": [
-        "/opt/ros/noetic/lib/ \
-                                        python3/dist-packages"
-    ],
+    "python.autoComplete.extraPaths": ["/opt/ros/noetic/lib/python3/dist-packages"],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": True,
+    },
     "cmake.sourceDirectory": "${workspaceFolder}/src",
     "cmake.configureOnOpen": False,
     "terminal.integrated.scrollback": 1000000,
-    "python.linting.flake8Args": [
-        "--max-line-length=120",
-        "--ignore=W291,E266",
-    ],
+    "editor.codeActionsOnSave": {"source.fixAll": True},
+    "editor.formatOnSave": True,
+    "clang-format.executable": "/usr/bin/clang-format-12",
+    "clang-format.style": "file",
+    "clang-format.language.c.enable": True,
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.wordBasedSuggestions": False,
+        "editor.suggest.insertMode": "replace",
+        "editor.semanticHighlighting.enabled": True,
+    },
+    "python.analysis.extraPaths": ["/opt/ros/noetic/lib/python3/dist-packages"],
 }
 # Store the data in the json file
 with open(".vscode/settings.json", "w") as jsonFile_settings:
