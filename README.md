@@ -1,4 +1,4 @@
-[![format_check](https://github.com/thijs83/Visual_Studio_Code_ROS/actions/workflows/format_check.yml/badge.svg)](https://github.com/thijs83/Visual_Studio_Code_ROS/actions/workflows/format_check.yml)
+[![format_check](https://github.com/thijs83/Visual_Studio_Code_ROS/actions/workflows/formatter.yml/badge.svg)](https://github.com/thijs83/Visual_Studio_Code_ROS/actions/workflows/formatter.yml)
 
 # Automation in VS Code with ROS
 
