@@ -69,7 +69,7 @@ Note: Make sure that the ROS environment is sourced in .bashrc and that ROS1 is 
 
 ## 3) Setting up Automated formatting using ROS standards
 
-The c++ formatter needs some extra steps, first install clang-tools-12.
+The c++ formatter needs some extra steps, first install clang-tools-12 using .
 ```
 sudo apt-get install clang-tools-12
 ```
@@ -77,7 +77,7 @@ And now we need to set the main c++ formatter to Clang-Format,
 ```
 press Ctrl+Shift+P -->> Format Document With... -->> Configure Default Formatter... -->> Clang-Format
 ```
-The format for clang tools is defined in the .clang-format file
+The format for clang tools is defined in the .clang-format file and is automatically used by the settings.json file created in previous step.
 
 ## 4) Automation of the VS workspace
 
@@ -144,7 +144,7 @@ The keybindings.json file will open. The keybindings in here overwrite the defau
     { 
         "key": "ctrl+F5",         
         "command": "workbench.action.tasks.runTask",
-        "args": "ROS: update Build & Debug"
+        "args": "ROS: catkin build debug"
     }
 ]
 ```
