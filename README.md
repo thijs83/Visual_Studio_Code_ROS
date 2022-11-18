@@ -10,9 +10,10 @@ Note: The assumption is made that you know how ROS works and that it is installe
 ## Contents:
 * [1. Visual Studio Code Extensions](#1-visual-studio-code-extensions)
 * [2. Setup of the VS workspace](#2-setup-of-the-vs-workspace)
-* [3. Automation of the VS workspace](#3-automation-of-the-vs-workspace)
-* [4. Debugging your code in VS with ROS](#4-debugging-your-code-in-vs-with-ros)
-* [5. Hints to increase development speed](#5-hints-to-increase-development-speed)
+* [3. Setting up automated formatting using ROS standarts](#3-setting-up-automated-formatting-using-ros-standards)
+* [4. Automation of the VS workspace](#4-automation-of-the-vs-workspace)
+* [5. Debugging your code in VS with ROS](#5-debugging-your-code-in-vs-with-ros)
+* [6. Hints to increase development speed](#6-hints-to-increase-development-speed)
 
 ## 1) Visual Studio Code Extensions
 
@@ -22,39 +23,20 @@ The following extensions are recommended:
 - ROS (Develop Robot Operating System (ROS) with Visual Studio Code.)
 - CMake (CMake langage support for Visual Studio Code)
 - CMake Tools (Extended CMake support in Visual Studio Code)
+- Black Formatter (Formatter extension for Visual Studio Code using black)
+- Clang-Format (Use Clang-Format in Visual Studio Code)
 
 ## 2) Setup of the VS Workspace
 
-First, a ROS workspace needs to be created, which eventually also will be the VS code workspace.
+We will setup the workspace automatically by running one of the python scripts. The script will ask you two specific questions. The first one will specify the catkin builder and the second if you want to use the example packages. Setup the workspace by using,
 ```bash
  mkdir ~/catkin_ws
  cd ~/catkin_ws
- mkdir src
- mkdir .vscode
-```
-Now we need to initilize the catkin workspace,
-```
-catkin build
-```
-Note: You could also use 'catkin_make' with this repository but it is recommended to use 'catkin build' since this repository only provides a basic setup for 'catkin_make' and doesn't have all the features described below.
-
-Note: Using catkin build or catkin_make is essential to set up the ROS workspace for VS to know that it is a ROS workspace
-
-Now we need the two files and too showcase the example, there are two beginner ROS packages included. These need to be moved to the src folder. If you have other packages then remove the ones included in this repository.
-```bash
  git clone https://github.com/thijs83/Visual_Studio_Code_ROS.git
- mv -v Visual_Studio_Code_ROS/beginner_tutorials/ src
- mv -v Visual_Studio_Code_ROS/hello_vs_code/ src
  mv -v Visual_Studio_Code_ROS/.vstools .
- sudo rm -r Visual_Studio_Code_ROS
+ python3 Visual_.vstools/initialise_VSDebug.py
 ```
-
-Now we run the first python file to setup all the .json files in the .vscode folder. These are used by VS code to setup the environment and determine the debug settings. This script only has to run one time (the first time).
-```bash
- python3 .vstools/initialise_VSDebug.py
-```
-
-Next, we need to open Visual Studio Code and open the folder catkin_ws. Now go to File -> Save Workspace As and press save. The final structure of the ROS and VS workspace will look like:
+When the script is done, you need to save the workspace. Go to File -> Save Workspace As and press save. The final structure of the ROS and VS workspace will look like:
 ```
 ~/catkin_ws/
     .catkin_tools
@@ -74,6 +56,7 @@ Next, we need to open Visual Studio Code and open the folder catkin_ws. Now go t
     src/
         beginner_tutorials/
         hello_vs_code/
+    .clang-format
 ```
 
 Below an image of how it will look like in Visual studio code.
@@ -84,7 +67,19 @@ Below an image of how it will look like in Visual studio code.
 
 Note: Make sure that the ROS environment is sourced in .bashrc and that ROS1 is mentioned with its distribution in the bar located at the bottom of VS code. If it is not the case, close Visual Studio Code and add the source of the ROS environment to your .bashrc and restart Visual Studio Code. ROS1 should now be visible.
 
-## 3) Automation of the VS workspace
+## 3) Setting up Automated formatting using ROS standards
+
+The c++ formatter needs some extra steps, first install clang-tools-12.
+```
+sudo apt-get install clang-tools-12
+```
+And now we need to set the main c++ formatter to Clang-Format,
+```
+press Ctrl+Shift+P -->> Format Document With... -->> Configure Default Formatter... -->> Clang-Format
+```
+The format for clang tools is defined in the .clang-format file
+
+## 4) Automation of the VS workspace
 
 Now everything is ready we can start automating using the second python script. To make it easy and not having to run the python script everytime, a task is made that can be run from the Command Palette. This task automatically runs 'catkin build'(with debug settings to ON) and then runs the python script to include all ros exutables to the debug section.
 ```
@@ -119,7 +114,7 @@ To stop the nodes, the terminals can be closed or the stop button can be pressed
 
 Now you know how to start the nodes and stop them. The next section shows how to debug the code
 
-## 4) Debugging your code in VS with ROS
+## 5) Debugging your code in VS with ROS
 
 The next step to debugging is very easy. Let's take the two nodes from previous section and open the scripts next to eachother and in both scripts set a Breakpoint as visualized in the image below.
 
@@ -136,7 +131,7 @@ Now run both scripts as done in previous section and see how the code stops at t
 | - You will see that the subscriber doesnt receive the first or first few messages. This is due to the setup of the architecture of ROS. The publisher is already publishing messages when the connections are not yet initialized, and thus are lost. To have zero loss, set a ros rate sleeper (of around 5 seconds) after setting up the publisher note and always first start the subscriber nodes. This will make sure that all messages are received by the subscribers. |
 | - Another thing, you will notice with the tutorial nodes that sometimes the breakpoint of the publisher is hit twice before the breakpoint in the subscriber is hit. This is due to the speed until the next breakpoint, the publisher was faster in hitting the next breakpoint than the subscriber was in receiving the message and hitting it's breakpoint. |
 
-## 5) Hints to increase development speed
+## 6) Hints to increase development speed
 
 ### Keybindings
 We can assign a keybinding to start ROS: update Build & Debug by doing:
