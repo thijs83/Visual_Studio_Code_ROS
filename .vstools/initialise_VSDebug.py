@@ -2,20 +2,83 @@
 
 import json
 import os
+import shutil
 from pathlib import Path
 
 # Retrieve the workspace folder
 workspace_folder = str(Path().absolute())
 
-# check if build with catkin_make or catkin build by finding the log folder
-folder_names = [
-    f
-    for f in os.listdir(workspace_folder)
-    if os.path.isdir(os.path.join(workspace_folder, f))
-]
-catkin_make = True
-if ".catkin_tools" in folder_names:
-    catkin_make = False
+# Define if the user wants to use "catkin build" or "catkin_make"
+print(
+    "\n Specify the catkin workspace that you want to use: \n \
+    [1] catkin build \n \
+    [2] catkin_make \n \
+It is highly recommended to use [1] catkin build, since the tools only provide a basic setup for [2] catkin_make. \n"
+)
+loop = True
+while loop:
+    value_input = int(input("Specify a correct number:"))
+    if value_input == 1:
+        catkin_make = False
+        loop = False
+        print("Catkin Build workspace specified")
+    elif value_input == 2:
+        catkin_make = True
+        loop = False
+        print("Catkin_make workspace specified")
+
+# Create src folder for packages if not existing
+try:
+    os.mkdir(workspace_folder + "/src")
+except Exception:
+    None
+
+# Move all the needed files to the workspace from the cloned repository and remove clone
+try:
+    shutil.move(
+        workspace_folder + "/Visual_Studio_Code_ROS/.clangformat", workspace_folder
+    )
+except Exception:
+    print(
+        "Couldn't move the .clang-format file, check if it is already in your workspace."
+    )
+
+# Specify if you want to use the example packages
+loop = True
+while loop:
+    str_input = input("\n Do you want to use the example packages (y/n):")
+    if str_input == "y":
+        try:
+            shutil.move(
+                workspace_folder + "/beginner_tutorials", workspace_folder + "/src"
+            )
+            shutil.move(workspace_folder + "/hello_vs_code", workspace_folder + "/src")
+        except Exception:
+            print(
+                "Couldn't move the example packages to the src folder! check your folders"
+            )
+        loop = False
+    elif str_input == "n":
+        try:
+            os.rmdir(workspace_folder + "/beginner_tutorials")
+            os.rmdir(workspace_folder + "/hello_vs_code")
+        except Exception:
+            print("Couldn't remove the example packages! check your folders")
+        loop = False
+
+# Remove the repository folder
+try:
+    os.rmdir(workspace_folder + "/Visual_Studio_Code_ROS")
+except Exception:
+    print(
+        "Couldn't remove the folder Visual_Studio_Code_ROS! It is probably already removed"
+    )
+
+# Create folder for VS code json files
+try:
+    os.mkdir(workspace_folder + "/.vscode")
+except Exception:
+    None
 
 ########################################################################################
 ## Creation of the tasks.json file
@@ -174,12 +237,15 @@ with open(".vscode/c_cpp_properties.json", "w") as jsonFile_c_cpp_properties:
 ########################################################################################
 extensions_data = {
     "recommendations": [
-        "eamodio.gitlens",
         "ms-iot.vscode-ros",
         "ms-python.python",
         "ms-vscode.cpptools",
         "twxs.cmake",
         "vscode-icons-team.vscode-icons",
+        "ms-python.black-formatter",
+        "xaver.clang-format",
+        "ms-vscode.cmake-tools",
+        "ms-python.isort"
     ]
 }
 # Store the data in the json file
@@ -199,7 +265,7 @@ settings_data = {
     "cmake.sourceDirectory": "${workspaceFolder}/src",
     "cmake.configureOnOpen": False,
     "terminal.integrated.scrollback": 1000000,
-    "editor.codeActionsOnSave": {"source.fixAll": True},
+    "editor.codeActionsOnSave": {"source.fixAll": True, "source.organizeImports": True},
     "editor.formatOnSave": True,
     "clang-format.executable": "/usr/bin/clang-format-12",
     "clang-format.style": "file",

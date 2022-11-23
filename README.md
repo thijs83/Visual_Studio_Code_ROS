@@ -34,7 +34,7 @@ We will setup the workspace automatically by running one of the python scripts. 
  cd ~/catkin_ws
  git clone https://github.com/thijs83/Visual_Studio_Code_ROS.git
  mv -v Visual_Studio_Code_ROS/.vstools .
- python3 Visual_.vstools/initialise_VSDebug.py
+ python3 .vstools/initialise_VSDebug.py
 ```
 When the script is done, you need to save the workspace. Go to File -> Save Workspace As and press save. The final structure of the ROS and VS workspace will look like:
 ```
