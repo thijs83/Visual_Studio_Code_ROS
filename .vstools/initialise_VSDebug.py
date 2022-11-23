@@ -21,26 +21,28 @@ while loop:
     if value_input == 1:
         catkin_make = False
         loop = False
-        print("Catkin Build workspace specified")
+        print("\n *Catkin Build workspace specified")
     elif value_input == 2:
         catkin_make = True
         loop = False
-        print("Catkin_make workspace specified")
+        print("\n *Catkin_make workspace specified")
 
 # Create src folder for packages if not existing
 try:
     os.mkdir(workspace_folder + "/src")
+    print("\n *Created folder src.")
 except Exception:
-    None
+    print("\n !Don't have to create folder src, already existing.")
 
 # Move all the needed files to the workspace from the cloned repository and remove clone
 try:
     shutil.move(
-        workspace_folder + "/Visual_Studio_Code_ROS/.clangformat", workspace_folder
+        workspace_folder + "/Visual_Studio_Code_ROS/.clang-format", workspace_folder
     )
+    print("\n *Moving .clang-format file to the workspace.")
 except Exception:
     print(
-        "Couldn't move the .clang-format file, check if it is already in your workspace."
+        " \n !Couldn't move the .clang-format file, check if it is already in your workspace."
     )
 
 # Specify if you want to use the example packages
@@ -53,25 +55,23 @@ while loop:
                 workspace_folder + "/beginner_tutorials", workspace_folder + "/src"
             )
             shutil.move(workspace_folder + "/hello_vs_code", workspace_folder + "/src")
+            print("\n *Moved both packages to the src folder.")
         except Exception:
             print(
-                "Couldn't move the example packages to the src folder! check your folders"
+                "\n !Couldn't move the example packages to the src folder! check your folders."
             )
         loop = False
     elif str_input == "n":
-        try:
-            os.rmdir(workspace_folder + "/beginner_tutorials")
-            os.rmdir(workspace_folder + "/hello_vs_code")
-        except Exception:
-            print("Couldn't remove the example packages! check your folders")
+        print("\n !Not using the test packages.")
         loop = False
 
 # Remove the repository folder
 try:
-    os.rmdir(workspace_folder + "/Visual_Studio_Code_ROS")
+    shutil.rmtree(workspace_folder + "/Visual_Studio_Code_ROS")
+    print("\n *Removing the github repository, not needed anymore.")
 except Exception:
     print(
-        "Couldn't remove the folder Visual_Studio_Code_ROS! It is probably already removed"
+        "\n !Couldn't remove the folder Visual_Studio_Code_ROS! check your workspace."
     )
 
 # Create folder for VS code json files
@@ -245,7 +245,7 @@ extensions_data = {
         "ms-python.black-formatter",
         "xaver.clang-format",
         "ms-vscode.cmake-tools",
-        "ms-python.isort"
+        "ms-python.isort",
     ]
 }
 # Store the data in the json file
@@ -282,3 +282,5 @@ settings_data = {
 with open(".vscode/settings.json", "w") as jsonFile_settings:
     json.dump(settings_data, jsonFile_settings, indent=4)
     jsonFile_settings.close()
+
+print("\n\n --- All done ---")
