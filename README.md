@@ -203,7 +203,76 @@ This file specifies the recommended extensions.
 
 ### <ins> settings.json </ins>
 
+`"python.autoComplete.extraPaths"`           
+Specifies the ros packages directory.
+
+`"[python]":"editor.defaultFormatter"`     
+Sets the default python formatter.
+
+`"[python]":"editor.formatOnSave"`      
+If you want the python files to be formatted automatically on save.
+
+`"cmake.sourceDirectory"`
+Directory where all the cmake files are located. The standard directory for is "${workspaceFolder}/src".
+
+`"cmake.configureOnOpen"`
+With ROS workspace this should be set to `false`, since cmake environment is only a subsection of ROS workspace.
+
+`"terminal.integrated.scrollback"`    
+The number of lines in your terminal before lines are deleted.
+
+`"editor.codeActionsOnSave":"source.fixAll"`    
+Removes imports that are not used in python on save.
+
+`"editor.codeActionsOnSave":"source.organizeImports"`   
+Organizes the python imports on save.
+
+`"editor.formatOnSave"`    
+Format c++ files on save.
+
+`"clang-format.executable"`    
+Path to the clang format program.
+
+`"clang-format.style"`    
+Specifies which style to use. In the case of this repository, a clang-format file specifies the style.
+
+`"clang-format.language.c.enable"`    
+Enable or disable all formatting of different C styles.
+
+`"[c]":"editor.defaultFormatter"`    
+The extension that is used for C styles formatting.   
+
+`"python.analysis.extraPaths"`   
+Adding extra path to ROS packages.
+
 
 
 ### <ins> tasks.json </ins>
+
+Here we can specify tasks that can be easily run using the tasks command palette (Ctrl+Shift+B). 
+
+`"label"`    
+The command name displayed in the command palette
+
+`"type"`   
+Specifies the tasks type. For a custom task set it to `shell`.
+
+`"command"`   
+Specify the command for the custom task that is entered in the `shell`.
+
+`"args"`   
+The arguments need to be specified in this field.
+
+`"problemMatcher"`   
+For catkin specify `catkin-gcc`. The task system will know when the task is finished if you want to set `"isBackground": true`. 
+
+`"presentation"`   
+Here we can specify different settings how the task is presented. In our case we want to `"reveal":"always"`, since we want to see what catkin is doing. Futhermore, we want the `"panel":"shared"` between different tasks that are dependend on eachother. The `"focus":true` let's the terminal get active, so we don't have to click on it to make the terminal active. Finally, `"clear":true` specifies that we want to clear the terminal before the command is run, so we only get details of the current command. 
+
+
+### <ins> launch.json </ins>
+
+This file is created when using the debug option. The file specifies the option for the Visual Studio Code Debugger. The launch configurations can be run from the dropdown menu in the debugger section.
+
+
 
