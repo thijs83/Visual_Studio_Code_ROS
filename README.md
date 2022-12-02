@@ -177,22 +177,22 @@ Below an explanation of each of the files.
 
 ### <ins> c_cpp_properties.json </ins>
 
--`"name"`         
+- `"name"`         
 Specifies the operating system.
 
--`"includePath"`       
+- `"includePath"`       
 Specifies the directories that intellisense searches for headers and c++ files.
 
--`"intellisenseMode"`          
+- `"intellisenseMode"`          
 Default for Linux is gcc-x64, msvc-x64 for Windows and clang-x64 for Mac.
 
--`"CompilerPath"`      
+- `"CompilerPath"`      
 The path to the compiler.
 
--`"cStandard"`     
+- `"cStandard"`     
 Specify the C standard.
 
--`"cppStandard"`       
+- `"cppStandard"`       
 Specify the c++ standard.
 
 
@@ -203,46 +203,46 @@ This file specifies the recommended extensions.
 
 ### <ins> settings.json </ins>
 
-`"python.autoComplete.extraPaths"`           
+- `"python.autoComplete.extraPaths"`           
 Specifies the ros packages directory.
 
-`"[python]":"editor.defaultFormatter"`     
+- `"[python]":"editor.defaultFormatter"`     
 Sets the default python formatter.
 
-`"[python]":"editor.formatOnSave"`      
+- `"[python]":"editor.formatOnSave"`      
 If you want the python files to be formatted automatically on save.
 
-`"cmake.sourceDirectory"`
+- `"cmake.sourceDirectory"`
 Directory where all the cmake files are located. The standard directory for is "${workspaceFolder}/src".
 
-`"cmake.configureOnOpen"`
+- `"cmake.configureOnOpen"`
 With ROS workspace this should be set to `false`, since cmake environment is only a subsection of ROS workspace.
 
-`"terminal.integrated.scrollback"`    
+- `"terminal.integrated.scrollback"`    
 The number of lines in your terminal before lines are deleted.
 
-`"editor.codeActionsOnSave":"source.fixAll"`    
+- `"editor.codeActionsOnSave":"source.fixAll"`    
 Removes imports that are not used in python on save.
 
-`"editor.codeActionsOnSave":"source.organizeImports"`   
+- `"editor.codeActionsOnSave":"source.organizeImports"`   
 Organizes the python imports on save.
 
-`"editor.formatOnSave"`    
+- `"editor.formatOnSave"`    
 Format c++ files on save.
 
-`"clang-format.executable"`    
+- `"clang-format.executable"`    
 Path to the clang format program.
 
-`"clang-format.style"`    
+- `"clang-format.style"`    
 Specifies which style to use. In the case of this repository, a clang-format file specifies the style.
 
-`"clang-format.language.c.enable"`    
+- `"clang-format.language.c.enable"`    
 Enable or disable all formatting of different C styles.
 
-`"[c]":"editor.defaultFormatter"`    
+- `"[c]":"editor.defaultFormatter"`    
 The extension that is used for C styles formatting.   
 
-`"python.analysis.extraPaths"`   
+- `"python.analysis.extraPaths"`   
 Adding extra path to ROS packages.
 
 
@@ -251,22 +251,22 @@ Adding extra path to ROS packages.
 
 Here we can specify tasks that can be easily run using the tasks command palette (Ctrl+Shift+B). 
 
-`"label"`    
+- `"label"`    
 The command name displayed in the command palette
 
-`"type"`   
+- `"type"`   
 Specifies the tasks type. For a custom task set it to `shell`.
 
-`"command"`   
+- `"command"`   
 Specify the command for the custom task that is entered in the `shell`.
 
-`"args"`   
+- `"args"`   
 The arguments need to be specified in this field.
 
-`"problemMatcher"`   
+- `"problemMatcher"`   
 For catkin specify `catkin-gcc`. The task system will know when the task is finished if you want to set `"isBackground": true`. 
 
-`"presentation"`   
+- `"presentation"`   
 Here we can specify different settings how the task is presented. In our case we want to `"reveal":"always"`, since we want to see what catkin is doing. Futhermore, we want the `"panel":"shared"` between different tasks that are dependend on eachother. The `"focus":true` let's the terminal get active, so we don't have to click on it to make the terminal active. Finally, `"clear":true` specifies that we want to clear the terminal before the command is run, so we only get details of the current command. 
 
 
