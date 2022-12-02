@@ -180,19 +180,19 @@ Below an explanation of each of the files.
 `"name"`         
 Specifies the operating system.
 
-`"includePath"`
+`"includePath"`       
 Specifies the directories that intellisense searches for headers and c++ files.
 
-`"intellisenseMode"`
+`"intellisenseMode"`          
 Default for Linux is gcc-x64, msvc-x64 for Windows and clang-x64 for Mac.
 
-`"CompilerPath"`
+`"CompilerPath"`      
 The path to the compiler.
 
-`"cStandard"`
+`"cStandard"`     
 Specify the C standard.
 
-`"cppStandard"`
+`"cppStandard"`       
 Specify the c++ standard.
 
 
