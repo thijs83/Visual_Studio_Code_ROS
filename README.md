@@ -14,6 +14,7 @@ Note: The assumption is made that you know how ROS works and that it is installe
 * [4. Automation of the VS workspace](#4-automation-of-the-vs-workspace)
 * [5. Debugging your code in VS with ROS](#5-debugging-your-code-in-vs-with-ros)
 * [6. Hints to increase development speed](#6-hints-to-increase-development-speed)
+* [7. Explanation of the .json files](#7-explanation-of-the-.json-files)
 
 ## 1) Visual Studio Code Extensions
 
@@ -25,6 +26,7 @@ The following extensions are recommended:
 - CMake Tools (Extended CMake support in Visual Studio Code)
 - Black Formatter (Formatter extension for Visual Studio Code using black)
 - Clang-Format (Use Clang-Format in Visual Studio Code)
+- isort (Import organization support for python)
 
 ## 2) Setup of the VS Workspace
 
@@ -78,6 +80,10 @@ And now we need to set the main c++ formatter to Clang-Format,
 press Ctrl+Shift+P -->> Format Document With... -->> Configure Default Formatter... -->> Clang-Format
 ```
 The format for clang tools is defined in the .clang-format file and is automatically used by the settings.json file created in previous step.
+
+Note: The formatter is recommended for a repository that maintains a certain standart between contributors. 
+
+| WARNING: If the formatter is not used from the beginning of a repository, it could change files in a way that pull requests can become huge. Make sure that you know this beforehand. |
 
 ## 4) Automation of the VS workspace
 
@@ -164,4 +170,40 @@ Now you will have to VS code windows, both with the same VS code workspace. Now 
 
 ![Alt-text-1](images/two_screens.png?raw=true "Use of two VS code windows")
 
+
+## 7) Explanation of the .json files
+
+Below an explanation of each of the files.
+
+### c_cpp_properties.json
+
+`"name"`         
+Specifies the operating system.
+
+`"includePath"`
+Specifies the directories that intellisense searches for headers and c++ files.
+
+`"intellisenseMode"`
+Default for Linux is gcc-x64, msvc-x64 for Windows and clang-x64 for Mac.
+
+`"CompilerPath"`
+The path to the compiler.
+
+`"cStandard"`
+Specify the C standard.
+
+`"cppStandard"`
+Specify the c++ standard.
+
+
+
+### extensions.json
+
+This file specifies the recommended extensions.
+
+### settings.json
+
+
+
+### tasks.json
 
