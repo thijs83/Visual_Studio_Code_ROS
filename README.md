@@ -175,7 +175,7 @@ Now you will have to VS code windows, both with the same VS code workspace. Now 
 
 Below an explanation of each of the files.
 
-### c_cpp_properties.json
+### <ins> c_cpp_properties.json </ins>
 
 `"name"`         
 Specifies the operating system.
@@ -197,13 +197,13 @@ Specify the c++ standard.
 
 
 
-### extensions.json
+### <ins> extensions.json </ins>
 
 This file specifies the recommended extensions.
 
-### settings.json
+### <ins> settings.json </ins>
 
 
 
-### tasks.json
+### <ins> tasks.json </ins>
 
