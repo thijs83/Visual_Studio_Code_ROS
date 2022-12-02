@@ -61,6 +61,8 @@ When the script is done, you need to save the workspace. Go to File -> Save Work
     .clang-format
 ```
 
+| WARNING: Make sure that the python file worked and the above files system looks identical to yours. |
+
 Below an image of how it will look like in Visual studio code.
 
 ![Alt text](images/image_setup.png?raw=true "Initial setup")
@@ -110,7 +112,13 @@ press Ctrl+Shift+B
 ```
 which will automatically go to the section: `Tasks: Run Task`.
 
-The last 3 tasks will first run catkin with debug mode and then use the extra python files in the .vstools to create a launch.json file in the .vscode folder. This will display the nodes or launch files in the debug section of VS code. This file will be updated automatically when one of these three tasks is run.
+The last 3 tasks,
+```
+ROS: catkin build debug ~ Debug rosrun
+ROS: catkin build debug ~ Debug roslaunch
+ROS: catkin build debug ~ Debug roslaunch from specific Pkg
+```
+ will first run catkin with debug mode and then use one of the extra python files in the .vstools to create a launch.json file in the .vscode folder. This will display the nodes or launch files in the debug section of VS code. This file will be updated automatically when one of these three tasks is run.
 
 For example puposes, we will run the rosrun debug on the example packages:
 ```
