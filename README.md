@@ -71,11 +71,11 @@ Note: Make sure that the ROS environment is sourced in .bashrc and that ROS1 is 
 
 ## 3) Setting up Automated formatting using ROS standards
 
-The c++ formatter needs some extra steps, first install clang-tools-12 using .
+This Visual Code environment has a autoformatter for both python and c++ when files are saved to the ROS standards. An extra feature is that python imports are sorted to alphabetical order. To use the c++ formatter, some extra steps are required. First install clang-tools-12 using a terminal:
 ```
 sudo apt-get install clang-tools-12
 ```
-And now we need to set the main c++ formatter to Clang-Format,
+And now we need to set the main c++ formatter to Clang-Format in Visual Studio Code using the command palette,
 ```
 press Ctrl+Shift+P -->> Format Document With... -->> Configure Default Formatter... -->> Clang-Format
 ```
@@ -85,17 +85,37 @@ Note: The formatter is recommended for a repository that maintains a certain sta
 
 | WARNING: If the formatter is not used from the beginning of a repository, it could change files in a way that pull requests can become huge. Make sure that you know this beforehand. |
 
+
 ## 4) Automation of the VS workspace
 
-Now everything is ready we can start automating using the second python script. To make it easy and not having to run the python script everytime, a task is made that can be run from the Command Palette. This task automatically runs 'catkin build'(with debug settings to ON) and then runs the python script to include all ros exutables to the debug section.
+Now everything is ready and we can start using the settings we made. From the command palette, a few tasks can be used that where previously made by the python file. To use these tasks:
 ```
-To do this: press Ctrl+Shift+P -->> Tasks: Run Task -->> ROS: catkin build debug ~ Debug rosrun
+press Ctrl+Shift+P -->> Tasks: Run Task 
+```
+And then specify one of the created tasks:
+```
+ROS: catkin build
+ROS: catkin clean
+ROS: catkin build debug
+ROS: catkin build debug ~ Debug rosrun
+ROS: catkin build debug ~ Debug roslaunch
+ROS: catkin build debug ~ Debug roslaunch from specific Pkg
 ```
 
 ![Alt-text-1](images/tasks.png?raw=true "Tasks drop down menu") ![Alt-text-2](images/ros_build.png?raw=true "ROS build drop down menu")
 
+or the faster way:
+```
+press Ctrl+Shift+B
+```
+which will automatically go to the section: `Tasks: Run Task`.
 
-Now in the folder .vscode another file will be included named launch.json automatically. Everytime you alter files or delete/add executables, you have to run the above command. (This command runs catkin_make automatically and then updates the launch.json, so all executables are up to date with your code)
+The last 3 tasks will first run catkin with debug mode and then use the extra python files in the .vstools to create a launch.json file in the .vscode folder. This will display the nodes or launch files in the debug section of VS code. This file will be updated automatically when one of these three tasks is run.
+
+For example puposes, we will run the rosrun debug on the example packages:
+```
+press Ctrl+Shift+B -->> ROS: catkin build debug ~ Debug rosrun
+```
 
 We can now go to the Run and Debug section (Ctrl+Shift+D) and all the ros nodes are added to the drop-down menu visualized in the image below. 
 

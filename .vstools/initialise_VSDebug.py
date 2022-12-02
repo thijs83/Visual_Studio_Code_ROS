@@ -241,7 +241,6 @@ extensions_data = {
         "ms-python.python",
         "ms-vscode.cpptools",
         "twxs.cmake",
-        "vscode-icons-team.vscode-icons",
         "ms-python.black-formatter",
         "xaver.clang-format",
         "ms-vscode.cmake-tools",
@@ -270,12 +269,7 @@ settings_data = {
     "clang-format.executable": "/usr/bin/clang-format-12",
     "clang-format.style": "file",
     "clang-format.language.c.enable": True,
-    "[c]": {
-        "editor.defaultFormatter": "xaver.clang-format",
-        "editor.wordBasedSuggestions": False,
-        "editor.suggest.insertMode": "replace",
-        "editor.semanticHighlighting.enabled": True,
-    },
+    "[c]": {"editor.defaultFormatter": "xaver.clang-format"},
     "python.analysis.extraPaths": ["/opt/ros/noetic/lib/python3/dist-packages"],
 }
 # Store the data in the json file
