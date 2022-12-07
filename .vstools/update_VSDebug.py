@@ -1,43 +1,44 @@
 #!/usr/bin/env python3
 
-import json
-from pathlib import Path
-import os
-import sys
 import glob
+import json
+import os
+import subprocess
+from pathlib import Path
 
 # Retrieve the workspace folder
 workspace_folder = str(Path().absolute())
 
-# Find all packages and check if there exists atleast one
-try:
-    package_names = [
-        f
-        for f in os.listdir(workspace_folder + "/devel/lib")
-        if os.path.isdir(os.path.join(workspace_folder + "/devel/lib", f))
-    ]
-    if "pkgconfig" in package_names:
-        package_names.remove("pkgconfig")
-    if "python3" in package_names:
-        package_names.remove("python3")
-except Exception:
-    print(
-        "First build the envirnment or include packages, \
-          before calling this script"
-    )
-    sys.exit(1)
+# Retrieve all package names
+process = subprocess.Popen(
+    ["catkin", "list", "--quiet"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+)
+
+# retrieve data from catkin list as a string array
+stdout, stderr = process.communicate()
+string = str(stdout)
+string = string.replace("\\n-", "")
+string = string.replace("\\n'", "")
+array = string.split()
+array = array[1:]
+array.sort()
+
+# check if there even exist one package
+if not array:
+    print("**No packages found!")
+    exit()
 
 
 ###################################################################
 # Creation of the launch.json file
 ###################################################################
 launch_data_array = []
-for i in package_names:
+for pkg in array:
     # Find all executables inside package
     executable_names = [
         f
-        for f in os.listdir(workspace_folder + "/devel/lib/" + str(i))
-        if os.path.isfile(os.path.join(workspace_folder + "/devel/lib/" + str(i), f))
+        for f in os.listdir(workspace_folder + "/devel/lib/" + pkg)
+        if os.path.isfile(os.path.join(workspace_folder + "/devel/lib/" + pkg, f))
     ]
 
     # Remove name cmake.lock
@@ -56,10 +57,10 @@ for i in package_names:
     for j in cpp_executable_names:
         launch_data_array.append(
             {
-                "name": "c++: " + str(j) + "_Node - PKG:" + str(i),
+                "name": "(" + pkg + ")  " + str(j) + " Node ",
                 "type": "cppdbg",
                 "request": "launch",
-                "program": "${workspaceFolder}/devel/lib/" + str(i) + "/" + str(j),
+                "program": "${workspaceFolder}/devel/lib/" + pkg + "/" + str(j),
                 "args": [],
                 "stopAtEntry": False,
                 "cwd": "${workspaceFolder}/../../",
@@ -78,14 +79,14 @@ for i in package_names:
 
     # Find the python files and also add them to the launch file
     for j in python_executable_names:
-        path_package = "./src/" + str(i)
+        path_package = "./src/" + pkg
         path_file = glob.glob(path_package + "/**/" + str(j), recursive=True)
 
         path = path_file[0]
 
         launch_data_array.append(
             {
-                "name": "py: " + str(j) + "_Node - PKG:" + str(i),
+                "name": "(" + pkg + ")  " + str(j) + " Node ",
                 "type": "python",
                 "request": "launch",
                 "program": "${workspaceFolder}" + path[1:],
